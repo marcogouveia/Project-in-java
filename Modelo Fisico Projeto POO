@@ -1,0 +1,37 @@
+
+CREATE TABLE funcionario (
+matricula int auto_increment PRIMARY KEY,
+salario decimal(8,2) NOT NULL,
+nome varchar(100) NOT NULL,
+rg varchar(10) NOT NULL,
+cpf varchar(11) NOT NULL UNIQUE
+);
+
+CREATE TABLE cliente (
+cpf varchar(11) PRIMARY KEY,
+rg varchar(10) NOT NULL,
+nome varchar(100) NOT NULL
+);
+
+
+CREATE TABLE classsificacaoproblema (
+codigo int auto_increment PRIMARY KEY,
+descricao varchar(255) ,
+nome varchar(30) NOT NULL
+);
+
+CREATE TABLE ordemservico (
+numero int auto_increment PRIMARY KEY ,
+motivocancelamento varchar(255) ,
+datacadastro datetime NOT NULL,
+datasolucao datetime,
+descricaoproblema varchar(255) NOT NULL,
+descricaoservico varchar(255),
+datacancelamento datetime,
+cpf varchar(11) NOT NULL,
+matricula int NOT NULL,
+codigoclassificacao int NOT NULL,
+FOREIGN KEY(cpf) REFERENCES cliente (cpf),
+FOREIGN KEY(matricula) REFERENCES funcionario (matricula),
+FOREIGN KEY(codigoclassificacao) REFERENCES classsificacaoproblema (codigo)
+);
